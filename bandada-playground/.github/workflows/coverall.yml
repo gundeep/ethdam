@@ -1,0 +1,48 @@
+name: coverall
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                tests:
+                    - jest
+                    - contracts
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 18.x
+                  cache: "yarn"
+
+            - name: Build monorepo
+              run: yarn
+
+            - name: Test code
+              run: yarn test:${{ matrix.tests }}:coverage
+
+            - name: Coveralls
+              uses: coverallsapp/github-action@v2
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  flag-name: run-${{ matrix.tests }}
+                  path-to-lcov: ./coverage/${{ matrix.tests }}/lcov.info
+                  parallel: true
+
+    finish:
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Coveralls Finished
+              uses: coverallsapp/github-action@v2
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  parallel-finished: true

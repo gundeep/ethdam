@@ -1,0 +1,38 @@
+{
+    "name": "dashboard",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite --port 3001",
+        "build": "tsc && vite build --mode production",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@bandada/credentials": "2.2.6",
+        "@bandada/utils": "2.2.6",
+        "@chakra-ui/icons": "^2.1.1",
+        "@chakra-ui/react": "^2.5.1",
+        "@chakra-ui/styled-system": "^2.0.0",
+        "@chakra-ui/theme-tools": "^2.0.16",
+        "@emotion/react": "^11.10.6",
+        "@emotion/styled": "^11.10.6",
+        "@fontsource-variable/unbounded": "^5.0.5",
+        "@rainbow-me/rainbowkit": "^0.12.8",
+        "@semaphore-protocol/data": "3.10.0",
+        "ethers": "5.5.1",
+        "framer-motion": "^10.0.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-icons": "^4.10.1",
+        "react-router-dom": "^6.8.1",
+        "siwe": "^1.1.6",
+        "wagmi": "^0.12.12"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.27",
+        "@types/react-dom": "^18.0.10",
+        "@vitejs/plugin-react": "^3.1.0",
+        "typescript": "^4.9.3",
+        "vite": "^4.1.0"
+    }
+}

@@ -1,0 +1,74 @@
+version: "3.9"
+
+services:
+    api:
+        container_name: api
+        build:
+            context: ./
+            dockerfile: ./apps/api/Dockerfile
+        image: bandada-api:latest
+        restart: unless-stopped
+        env_file:
+            - apps/api/.env
+        ports:
+            - "3000:3000"
+        networks:
+            - bandada
+
+    client:
+        container_name: client
+        build:
+            context: ./
+            dockerfile: ./apps/client/Dockerfile
+        image: bandada-client:latest
+        restart: unless-stopped
+        environment:
+            - NODE_ENV=production
+        ports:
+            - "3002:80"
+        networks:
+            - bandada
+        depends_on:
+            - api
+
+    dashboard:
+        container_name: dashboard
+        build:
+            context: ./
+            dockerfile: ./apps/dashboard/Dockerfile
+        image: bandada-dashboard:latest
+        restart: unless-stopped
+        environment:
+            - NODE_ENV=production
+        ports:
+            - "3001:80"
+        networks:
+            - bandada
+        depends_on:
+            - api
+
+    postgres:
+        container_name: postgres
+        image: postgres
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: helloworld
+            POSTGRES_DB: bandada
+            PGDATA: /data/postgres
+        volumes:
+            - postgres:/data/postgres
+            - ./database/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+        ports:
+            - "5432:5432"
+        restart: unless-stopped
+        command: postgres -c listen_addresses='*'
+        networks:
+            - bandada
+
+networks:
+    bandada:
+        internal: false
+        driver: bridge
+
+volumes:
+    postgres:

@@ -1,0 +1,80 @@
+name: Deploy
+on:
+    push:
+        branches:
+            - main
+            - dev
+    workflow_dispatch:
+        inputs:
+            build:
+                description: "Build trigger"
+                required: true
+                default: "enable"
+                type: choice
+                options:
+                    - enable
+                    - disable
+            environment:
+                description: "Environment"
+                required: true
+                default: "prod"
+                type: choice
+                options:
+                    - prod
+                    - stg
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        env:
+            DATA: ${{ github.event.inputs.build || 'enable' }}
+            DATA_ENV: ${{ github.event.inputs.environment || 'prod' }}
+        permissions:
+            id-token: write
+            contents: read
+
+        steps:
+            - name: Manipulate Environment
+              id: manipulate
+              run: |
+                  if [ "${{ github.event_name }}" = "push" ] && [ "$GITHUB_REF_NAME" = "main" ]; then
+                    echo "env=prod" >> $GITHUB_OUTPUT
+                  elif [ "${{ github.event_name }}" = "push" ] && [ "$GITHUB_REF_NAME" = "dev" ]; then
+                    echo "env=stg" >> $GITHUB_OUTPUT
+                  elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+                    echo "env=${{ env.DATA_ENV }}" >> $GITHUB_OUTPUT
+                  else
+                    echo "Operation not permitted"
+                    exit 1
+                  fi
+
+            - name: Check production branch
+              run: |
+                  if [ "${{ steps.manipulate.outputs.env }}" = "prod" ] && [ "$GITHUB_REF_NAME" != "main" ]; then
+                    echo "Operation not permitted"
+                    exit 1
+                  fi
+
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  persist-credentials: false
+
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v2
+              with:
+                  role-to-assume: arn:aws:iam::490752553772:role/bandada-ecs-deploy-slc
+                  role-duration-seconds: 2700
+                  aws-region: eu-central-1
+
+            - name: Build and Push images to ECR
+              run: |
+                  .github/scripts/build.sh ${{ env.DATA }} ${{ steps.manipulate.outputs.env }}
+
+            - name: Create Deployment
+              run: |
+                  .github/scripts/deploy.sh ${{ steps.manipulate.outputs.env }}
