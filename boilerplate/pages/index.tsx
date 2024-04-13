@@ -48,13 +48,13 @@ export default function Home() {
     return (
       <div className="lg:w-2/5 md:w-2/4 w-full">
         <div className="flex justify-between items-center mb-3">
-          <div className="text-2xl font-semibold text-slate-700">Identity</div>
+          <div className="text-2xl font-semibold text-slate-700">Member ID information</div>
           <div>
             <button
               className="flex justify-center items-center w-auto space-x-1 verify-btn text-lg font-medium rounded-md bg-gradient-to-r text-slate-700"
               onClick={createIdentity}
             >
-              <span>New</span>
+              <span>Add New Member</span>
             </button>
           </div>
         </div>
@@ -84,22 +84,17 @@ export default function Home() {
     <div>
       <div>
         <div className="flex justify-center items-center">
-          <h1 className="text-3xl font-semibold text-slate-700">Identities</h1>
+          <h1 className="text-3xl font-semibold text-slate-700">Members</h1>
         </div>
         <div className="flex justify-center items-center mt-10">
           <span className="lg:w-2/5 md:w-2/4 w-full">
             <span>
-              Users interact with Bandada using a{" "}
-              <a
-                className="space-x-1 text-blue-700 hover:underline"
-                href="https://docs.semaphore.pse.dev/guides/identities"
-                target="_blank"
-                rel="noreferrer noopener nofollow"
-              >
-                Semaphore identity
-              </a>{" "}
-              (similar to Ethereum accounts). It contains three values:
+              Members can create there annonomous identity (using Semaphore) here. 
             </span>
+            <span>
+            Identity has three components:
+            </span>
+
             <ol className="list-decimal pl-4 mt-5 space-y-3">
               <li>Trapdoor: private, known only by user</li>
               <li>Nullifier: private, known only by user</li>

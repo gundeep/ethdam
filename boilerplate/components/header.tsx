@@ -4,10 +4,10 @@ export default function Header() {
   return (
     <header className="flex flex-wrap justify-between p-5 mb-5">
       <Link
-        href="/"
-        className="text-xl md:mb-auto mb-5 font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600"
+        href="/about"
+        className="flex justify-center items-center text-4xl font-bold text-blue-500"
       >
-        Feedback
+        WhistleBlower
       </Link>
       <a
         href={`${process.env.NEXT_PUBLIC_BANDADA_DASHBOARD_URL}/groups/off-chain/${process.env.NEXT_PUBLIC_BANDADA_GROUP_ID}`}
@@ -15,7 +15,7 @@ export default function Header() {
         target="_blank"
         rel="noreferrer noopener nofollow"
       >
-        <span>Bandada group</span>
+        <span>Visit Group Dashboard</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
