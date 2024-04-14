@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <div>
       <div className="flex justify-center items-center">
-        <h1 className="text-3xl font-semibold text-slate-700">Members</h1>
+        <h1 className="text-3xl font-semibold text-slate-700">Organization Name</h1>
       </div>
       <div className="flex justify-center items-center mt-10">
         <div className="lg:w-2/5 md:w-2/4 w-full bg-blue-100 p-6 rounded-lg shadow-lg text-center">

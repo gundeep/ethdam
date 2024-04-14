@@ -1,20 +1,17 @@
-import Link from "next/link"
-
 export default function Header() {
   return (
-    <header className="flex flex-wrap justify-between p-5 mb-5">
-      <Link
-        href="/about"
-        className="flex justify-center items-center space-x-2">
-  <img src="logo.png" alt="Logo" className="h-6 w-6" />
-  <h1 className="text-4xl font-bold text-center text-blue-500">Whisper</h1>      </Link>
+    <header className="flex justify-between items-center p-2 bg-gradient-to-r from-blue-200 to-blue-300 rounded-lg shadow-lg">
+      <div></div>
+      <div className="flex justify-center items-center space-x-2 text-white">
+        <img src="/logo-no-background.svg" alt="Logo" className="h-auto w-48" />
+      </div>
       <a
         href={`${process.env.NEXT_PUBLIC_BANDADA_DASHBOARD_URL}/groups/off-chain/${process.env.NEXT_PUBLIC_BANDADA_GROUP_ID}`}
-        className="flex space-x-1 text-blue-600 hover:underline"
+        className="flex space-x-1 text-white hover:underline"
         target="_blank"
         rel="noreferrer noopener nofollow"
       >
-        <span>Visit Group Dashboard</span>
+        <span>Group Dashboard</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
