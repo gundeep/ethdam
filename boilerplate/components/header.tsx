@@ -5,9 +5,9 @@ export default function Header() {
     <header className="flex flex-wrap justify-between p-5 mb-5">
       <Link
         href="/about"
-        className="flex justify-center items-center text-4xl font-bold text-blue-500"
-      >
-        WhistleBlower
+        className="flex justify-center items-center space-x-2">
+  <img src="logo.png" alt="Logo" className="h-6 w-6" />
+  <h1 className="text-2xl font-bold">Whisper</h1>
       </Link>
       <a
         href={`${process.env.NEXT_PUBLIC_BANDADA_DASHBOARD_URL}/groups/off-chain/${process.env.NEXT_PUBLIC_BANDADA_GROUP_ID}`}

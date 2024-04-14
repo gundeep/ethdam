@@ -46,36 +46,40 @@ export default function Home() {
 
   const renderIdentity = () => {
     return (
-      <div className="lg:w-2/5 md:w-2/4 w-full">
-        <div className="flex justify-between items-center mb-3">
-          <div className="text-2xl font-semibold text-slate-700">Member ID information</div>
-          <div>
-            <button
-              className="flex justify-center items-center w-auto space-x-1 verify-btn text-lg font-medium rounded-md bg-gradient-to-r text-slate-700"
-              onClick={createIdentity}
-            >
-              <span>Add New Member</span>
-            </button>
-          </div>
-        </div>
 
-        <div className="flex justify-center items-center">
-          <div className="overflow-auto border-2 p-7 border-slate-300 space-y-3">
-            {/* Display identity details: Trapdoor, Nullifier, Commitment */}
-            <div className="flex space-x-2">
-              <div>Trapdoor:</div>
-              <div>{_identity?.trapdoor.toString()}</div>
-            </div>
-            <div className="flex space-x-2">
-              <div>Nullifier:</div>
-              <div>{_identity?.nullifier.toString()}</div>
-            </div>
-            <div className="flex space-x-2">
-              <div>Commitment:</div>
-              <div>{_identity?.commitment.toString()}</div>
-            </div>
-          </div>
-        </div>
+        <div className="bg-purple-500 lg:w-2/5 md:w-2/4 w-full flex flex-col rounded-lg shadow-lg overflow-hidden">
+      <div className="bg-purple-700 p-4">
+        <h2 className="text-3xl font-bold text-white">Members</h2>
+      </div>
+      <div className="flex-grow p-4 bg-purple-300">
+        <button
+          className="flex justify-center items-center w-auto space-x-1 verify-btn text-lg font-medium rounded-md bg-purple-700 text-white"
+          onClick={createIdentity}
+        >
+          <span className="text-2xl">Generate a Member Profile</span>
+        </button>
+      </div>
+      <div className="bg-purple-700 p-4">
+        <p className="text-2xl text-white">Member Credentials</p>
+      </div>
+
+      <div className="flex justify-center items-center">
+  <div className="overflow-auto border-2 p-7 border-slate-300 space-y-3 bg-blue-100 rounded-lg shadow-lg">
+    {/* Display identity details: Trapdoor, Nullifier, Commitment */}
+    <div className="flex space-x-2">
+      <div className="text-lg font-bold text-blue-700">Trapdoor:</div>
+      <div className="text-lg text-blue-600">{_identity?.trapdoor.toString()}</div>
+    </div>
+    <div className="flex space-x-2">
+      <div className="text-lg font-bold text-blue-700">Nullifier:</div>
+      <div className="text-lg text-blue-600">{_identity?.nullifier.toString()}</div>
+    </div>
+    <div className="flex space-x-2">
+      <div className="text-lg font-bold text-blue-700">Commitment:</div>
+      <div className="text-lg text-blue-600">{_identity?.commitment.toString()}</div>
+    </div>
+  </div>
+</div>
       </div>
     )
   }
@@ -87,22 +91,21 @@ export default function Home() {
           <h1 className="text-3xl font-semibold text-slate-700">Members</h1>
         </div>
         <div className="flex justify-center items-center mt-10">
-          <span className="lg:w-2/5 md:w-2/4 w-full">
-            <span>
-              Members can create there annonomous identity (using Semaphore) here. 
-            </span>
-            <span>
-            Identity has three components:
-            </span>
+  <div className="lg:w-2/5 md:w-2/4 w-full bg-blue-100 p-6 rounded-lg shadow-lg text-center">
+    <h2 className="text-2xl font-semibold text-blue-700 mb-4">
+      Members can create their anonymous identity (using Semaphore) here. Identity has three components:
 
-            <ol className="list-decimal pl-4 mt-5 space-y-3">
-              <li>Trapdoor: private, known only by user</li>
-              <li>Nullifier: private, known only by user</li>
-              <li>Commitment: public</li>
-            </ol>
-            <Divider />
-          </span>
-        </div>
+    </h2>
+    <p className="text-lg text-blue-600 mb-4">
+    </p>
+    <ol className="list-decimal pl-4 mt-5 space-y-3 text-lg text-blue-600">
+      <li>Trapdoor: private, known only by user</li>
+      <li>Nullifier: private, known only by user</li>
+      <li>Commitment: public</li>
+    </ol>
+    <Divider />
+  </div>
+</div>
         <div className="flex justify-center items-center mt-5">
           {/* Render identity details or creation button based on state */}
           {_identity ? (
