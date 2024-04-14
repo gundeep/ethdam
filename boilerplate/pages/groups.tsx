@@ -21,7 +21,7 @@
 
         const [selectedGroup, setSelectedGroup] = useState(null);
 
-        const groups = ['Gossip Group [open]', 'WhistleBlower Group [credential]', 'Insights Groups']; // replace with actual group data
+        const groups = ['Gossip Group [invite]', 'WhistleBlower Group [credential]', 'Insights Groups']; // replace with actual group data
 
         const handleJoinGroup = () => {
         if (selectedGroup) {
@@ -255,7 +255,7 @@
           <div>
             <div>
             <div className="flex justify-center items-center bg-gradient-to-r from-green-400 to-blue-500 p-4 rounded-lg">
-        <h1 className="text-4xl font-bold text-white">Organization Groups</h1>
+        <h1 className="text-4xl font-bold text-white">Booking.com groups</h1>
       </div>
               <div className="flex justify-center items-center mt-10">
                 <span className="lg:w-2/5 md:w-2/4 w-full">

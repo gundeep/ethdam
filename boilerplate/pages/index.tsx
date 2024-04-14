@@ -8,6 +8,7 @@ export default function Home() {
   const router = useRouter();
   const [_identity, setIdentity] = useState<Identity>();
   const localStorageTag = process.env.NEXT_PUBLIC_LOCAL_STORAGE_TAG!;
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     const identityString = localStorage.getItem(localStorageTag);
@@ -34,19 +35,28 @@ export default function Home() {
         <div className="bg-yellow-700 p-4">
           <h2 className="text-3xl font-bold text-white">Members</h2>
         </div>
-        <div className="flex-grow p-4 bg-yellow-300">
+        <div className="flex-grow p-4 bg-yellow-300 flex justify-center items-center">
           <button
             className="flex justify-center items-center w-auto space-x-1 verify-btn text-xl font-semibold rounded-lg bg-yellow-700 text-white px-4 py-2 hover:bg-yellow-600 transition duration-200 ease-in-out"
             onClick={createIdentity}
           >
-            <span className="text-2xl">Generate a Member Profile</span>
+            <span className="text-xl">Generate a Member Profile</span>
           </button>
         </div>
         <div className="bg-yellow-700 p-4 flex items-center justify-center">
-          <p className="text-2xl text-white">Member Credentials</p>
+        <button onClick={() => setShowDetails(!showDetails)}>
+            Member Credentials
+        </button>
         </div>
+        {
+        showDetails && (
         <div className="flex justify-center items-center">
           <div className="overflow-auto border-2 p-7 border-slate-300 space-y-3 bg-blue-100 rounded-lg shadow-lg">
+          <ol className="list-none text-center pl-4 mt-5 space-y-3 text-lg text-blue-900 font-bol">
+            <li>Trapdoor: private, known only by user</li>
+            <li>Nullifier: private, known only by user</li>
+            <li>Commitment: public</li>
+          </ol>
             <div className="flex space-x-2">
               <div className="text-lg font-bold text-blue-700">Trapdoor:</div>
               <div className="text-lg text-blue-600">{_identity?.trapdoor.toString()}</div>
@@ -61,25 +71,22 @@ export default function Home() {
             </div>
           </div>
         </div>
+        )}
       </div>
     );
   };
 
   return (
     <div>
-      <div className="flex justify-center items-center">
-        <h1 className="text-3xl font-semibold text-slate-700">Organization Name</h1>
+      <div className="flex justify-center items-center mt-10">
+        <h1 className="text-3xl font-semibold text-slate-700">Whisper@Booking.com</h1>
       </div>
       <div className="flex justify-center items-center mt-10">
         <div className="lg:w-2/5 md:w-2/4 w-full bg-blue-100 p-6 rounded-lg shadow-lg text-center">
           <h2 className="text-2xl font-semibold text-blue-700 mb-4">
-            Members can create their anonymous identity (using Semaphore) here. Identity has three components:
+            Members can create their anonymous identity (using Semaphore) here. Identity has three components described below.
           </h2>
-          <ol className="list-decimal pl-4 mt-5 space-y-3 text-lg text-blue-600">
-            <li>Trapdoor: private, known only by user</li>
-            <li>Nullifier: private, known only by user</li>
-            <li>Commitment: public</li>
-          </ol>
+
           <Divider />
         </div>
       </div>

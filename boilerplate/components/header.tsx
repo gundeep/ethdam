@@ -2,7 +2,7 @@ export default function Header() {
   return (
     <header className="flex justify-between items-center p-2 bg-gradient-to-r from-blue-200 to-blue-300 rounded-lg shadow-lg">
       <div></div>
-      <div className="flex justify-center items-center space-x-2 text-white">
+      <div className="flex justify-center items-center space-x-20 ml-40 text-white">
         <img src="/logo-no-background.svg" alt="Logo" className="h-auto w-48" />
       </div>
       <a

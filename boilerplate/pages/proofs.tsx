@@ -22,6 +22,9 @@ export default function ProofsPage() {
   const [_loading, setLoading] = useState<boolean>(false)
   const [_renderInfoLoading, setRenderInfoLoading] = useState<boolean>(false)
   const [_feedback, setFeedback] = useState<string[]>([])
+  const [upvotes, setUpvotes] = useState(0);
+  const [downvotes, setDownvotes] = useState(0);
+  const [feedbacks, setFeedbacks] = useState(_feedback?.map(feedback => ({ feedback, upvotes: 0, downvotes: 0 })));
 
   // Environment variables.
   const localStorageTag = process.env.NEXT_PUBLIC_LOCAL_STORAGE_TAG!
@@ -179,10 +182,13 @@ export default function ProofsPage() {
             <div className="space-y-3">
               {_feedback?.map((feedback, i) => (
                 <div
+                  
                   key={i}
                   className="overflow-auto border-2 p-3 border-slate-300 space-y-3"
                 >
                   {decodeBytes32String(toBeHex(feedback))}
+                <button onClick={() => setUpvotes(upvotes + 1)}>👍 {upvotes}</button>
+                <button onClick={() => setDownvotes(downvotes + 1)}>👎 {downvotes}</button>
                 </div>
               ))}
             </div>
@@ -200,23 +206,21 @@ export default function ProofsPage() {
     <div>
       <div>
         <div className="flex justify-center items-center">
-          <h1 className="text-3xl font-semibold text-slate-700">Proofs</h1>
+          <h1 className="text-3xl font-semibold text-slate-700"></h1>
         </div>
         <div className="flex justify-center items-center mt-10">
           <span className="lg:w-2/5 md:w-2/4 w-full">
             <span>
               Members can anonymously{" "}
-              <a
+              {/* <a
                 className="space-x-1 text-blue-700 hover:underline"
                 href="https://semaphore.pse.dev/docs/guides/proofs"
                 target="_blank"
                 rel="noreferrer noopener nofollow"
               >
-                prove
-              </a>{" "}
-              that they are part of a group and that they are generating their
-              own signals. Signals could be anonymous votes, leaks, reviews, or
-              feedback.
+                send
+              </a>{" "} */}
+              send a signal/message.
             </span>
             <Divider />
           </span>

@@ -14,9 +14,10 @@ export default function Layout({ children }: any) {
         <meta name="theme-color" content="#3b82f6" />
       </Head>
 
-      <div className="flex flex-col min-h-screen text-slate-900">
+      <div className="flex flex-col min-h-screen text-slate-900 bg-blue-100">
         <Header />
-        <main className="mb-auto px-2">{children}</main>
+        <main className="mb-auto px-10">{children}</main>
+
         <Footer />
       </div>
     </>
