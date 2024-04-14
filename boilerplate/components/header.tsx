@@ -7,8 +7,7 @@ export default function Header() {
         href="/about"
         className="flex justify-center items-center space-x-2">
   <img src="logo.png" alt="Logo" className="h-6 w-6" />
-  <h1 className="text-2xl font-bold">Whisper</h1>
-      </Link>
+  <h1 className="text-4xl font-bold text-center text-blue-500">Whisper</h1>      </Link>
       <a
         href={`${process.env.NEXT_PUBLIC_BANDADA_DASHBOARD_URL}/groups/off-chain/${process.env.NEXT_PUBLIC_BANDADA_GROUP_ID}`}
         className="flex space-x-1 text-blue-600 hover:underline"
